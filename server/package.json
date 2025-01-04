@@ -13,6 +13,8 @@
   "license": "ISC",
   "description": "NASA Mission API",
   "dependencies": {
+    "cors": "^2.8.5",
+    "csv-parse": "^5.6.0",
     "express": "^4.21.2"
   }
 }
