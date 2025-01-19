@@ -15,7 +15,7 @@ function isHabitable(planet) {
   }
 }
 
-//! createReadStream will create readstream and node will execurte  it asynchronously so when it is executing node will execure export statement and wrong data fill be exported. To solve this promises is used and when that promises is resolved then next statement is exexuted. In server before listening to the server we will execute this promise so that our app can send proper data
+//! createReadStream will create readstream and node will execurte  it asynchronously so when it is executing node will execute export statement and wrong data fill be exported. To solve this promises is used and when that promises is resolved then next statement is exexuted. In server before listening to the server we will execute this promise so that our app can send proper data
 
 function loadPlanets() {
   new Promise((resolve, reject) => {
