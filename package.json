@@ -6,9 +6,9 @@
     "server": "npm run watch --prefix server",
     "client": "npm start --prefix client",
     "watch": "npm-run-all --parallel server client",
-    "buildMain": "npm run build --prefix client ",
+    "buildMain": "npm run build --prefix client",
     "serverStart": "npm run server",
-    "build": "npm-run-all buildMain serverStart",
+    "deploy": "npm-run-all buildMain serverStart",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
