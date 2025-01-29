@@ -44,4 +44,9 @@ function loadPlanets() {
   });
 }
 
-export { loadPlanets, habitablePlanets as planets };
+function getAllPlanets() {
+  return habitablePlanets;
+}
+
+export { loadPlanets, getAllPlanets };
+// export { loadPlanets, habitablePlanets as planets };
