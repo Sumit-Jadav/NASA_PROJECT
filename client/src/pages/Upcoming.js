@@ -15,7 +15,7 @@ const Upcoming = (props) => {
 
   const tableBody = useMemo(() => {
     return launches
-      ?.filter((launch) => !launch.upcoming)
+      ?.filter((launch) => launch.upcoming)
       .map((launch) => {
         return (
           <tr key={String(launch.flightNumber)}>
