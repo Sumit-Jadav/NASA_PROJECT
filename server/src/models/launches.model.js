@@ -9,7 +9,7 @@ const launch = {
   launchDate: new Date("December 27 , 2030"),
   target: "Kepler-442 b",
   customer: ["ISRO", "NASA"],
-  upcomming: true,
+  upcoming: true,
   sucess: true,
 };
 
@@ -25,10 +25,21 @@ function addNewLaunch(launch) {
     newFlightNumber,
     Object.assign(launch, {
       sucess: true,
-      upcomming: true,
+      upcoming: true,
       customer: ["ZTM", "NASA"],
       flightNumber: newFlightNumber,
     })
   );
 }
-export { getAllLaunches, addNewLaunch };
+
+function existLaunchWithId(launchId) {
+  return launches.has(launchId);
+}
+
+function abortById(launchId) {
+  const aborted = launches.get(launchId);
+  aborted.upcoming = false;
+  aborted.sucess = false;
+  return aborted;
+}
+export { getAllLaunches, addNewLaunch, existLaunchWithId, abortById };
