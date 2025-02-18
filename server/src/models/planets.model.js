@@ -1,8 +1,9 @@
 import fs from "fs";
 import { parse } from "csv-parse";
 import path from "path";
+import planets from "./planets.mongo.js";
 
-const habitablePlanets = [];
+// const habitablePlanets = [];
 
 function isHabitable(planet) {
   if (
@@ -28,24 +29,50 @@ function loadPlanets() {
           columns: true,
         })
       )
-      .on("data", (chunk) => {
+      .on("data", async (chunk) => {
         if (isHabitable(chunk)) {
-          habitablePlanets.push(chunk);
+          // habitablePlanets.push(chunk);
+          await savePlanet(chunk);
         }
       })
       .on("error", (err) => {
         console.log(`Error :- ${err.message}`);
         reject(err); //! reject promise when some error occure
       })
-      .on("end", () => {
-        console.log(`${habitablePlanets.length} planets found`);
+      .on("end", async () => {
+        const countPlanets = (await getAllPlanets()).length;
+        console.log(`${countPlanets} planets found`);
         resolve(); //! resolve promise when data is completely loaded.
       });
   });
 }
 
-function getAllPlanets() {
-  return habitablePlanets;
+async function getAllPlanets() {
+  return await planets.find(
+    {},
+    {
+      __v: 0,
+      _id: 0,
+    }
+  );
+}
+
+async function savePlanet(planet) {
+  try {
+    await planets.updateOne(
+      {
+        kepler_name: planet.kepler_name,
+      },
+      {
+        kepler_name: planet.kepler_name,
+      },
+      {
+        upsert: true,
+      }
+    );
+  } catch (error) {
+    console.log(`Could not save planet!! ${error.message}`);
+  }
 }
 
 export { loadPlanets, getAllPlanets };
