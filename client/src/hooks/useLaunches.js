@@ -47,14 +47,18 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
 
   const abortLaunch = useCallback(
     async (id) => {
+      saveLaunches((prevLaunches) =>
+        prevLaunches.filter((launch) => launch.flightNumber)
+      );
       const response = await httpAbortLaunch(id);
 
       const success = response.ok;
       if (success) {
-        getLaunches();
+        // getLaunches();
         onAbortSound();
       } else {
         onFailureSound();
+        getLaunches();
       }
     },
     [getLaunches, onAbortSound, onFailureSound]
