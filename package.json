@@ -9,7 +9,9 @@
     "buildMain": "npm run build --prefix client",
     "serverStart": "npm run server",
     "deploy": "npm-run-all buildMain serverStart",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-server": "npm run test --prefix server",
+    "test-client": "npm run test --prefix client",
+    "test": "npm-run-all test-server test-client"
   },
   "repository": {
     "type": "git",
